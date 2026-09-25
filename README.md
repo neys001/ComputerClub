@@ -52,34 +52,7 @@ CREATE UNIQUE INDEX one_active_reservation ON reservations(workstation_id) WHERE
 
 ## Структура базы данных
 
-```mermaid
-erDiagram
-    ZONES ||--o{ WORKSTATIONS : "включает"
-    CLIENTS ||--o{ RESERVATIONS : "бронирует"
-    WORKSTATIONS ||--o{ RESERVATIONS : "бронируется"
-    ZONES {
-        int id PK
-        string name
-        numeric hourly_rate
-    }
-    WORKSTATIONS {
-        int id PK
-        int zone_id FK
-        string name
-    }
-    CLIENTS {
-        int id PK
-        string name
-        string phone
-    }
-    RESERVATIONS {
-        int id PK
-        int client_id FK
-        int workstation_id FK
-        timestamp start_time
-        string status
-    }
-```
+![Схема базы данных](screenshots/database.png)
 
 Скрипт создания таблиц и тестовые данные лежат в [`database/schema.sql`](database/schema.sql).
 

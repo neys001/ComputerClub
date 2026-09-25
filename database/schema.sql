@@ -5,7 +5,9 @@ CREATE TABLE reservations (id SERIAL PRIMARY KEY,
   client_id INT NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
   workstation_id INT NOT NULL REFERENCES workstations(id) ON DELETE CASCADE,
   start_time TIMESTAMP NOT NULL DEFAULT now(),
-  status VARCHAR(20) NOT NULL DEFAULT 'active');
+  end_time TIMESTAMP,
+  status VARCHAR(20) NOT NULL DEFAULT 'active',
+  total_cost NUMERIC(10,2));
 CREATE UNIQUE INDEX one_active_reservation ON reservations(workstation_id) WHERE status = 'active';
 INSERT INTO zones (name, hourly_rate) VALUES ('Standard', 150), ('VIP', 300), ('PlayStation', 250);
 INSERT INTO workstations (zone_id, name) VALUES (1,'PC-01'),(1,'PC-02'),(1,'PC-03'),(2,'VIP-01'),(2,'VIP-02'),(3,'PS5-01');
